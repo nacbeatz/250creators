@@ -81,9 +81,22 @@ export default function CreatorsRegistration() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        alert('Registration sent!');
+      } else {
+        alert('Failed to send registration.');
+      }
+    } catch (error) {
+      alert('Error submitting form.');
+    }
   }
 
   const [step, setStep] = useState(1);
