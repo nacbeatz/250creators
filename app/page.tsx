@@ -83,20 +83,8 @@ export default function CreatorsRegistration() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        alert('Registration sent!');
-      } else {
-        alert('Failed to send registration.');
-      }
-    } catch (error) {
-      alert('Error submitting form.');
-    }
+    // TODO: Integrate EmailJS here for frontend email sending
+    alert('Form submission will be handled by EmailJS.');
   }
 
   const [step, setStep] = useState(1);
