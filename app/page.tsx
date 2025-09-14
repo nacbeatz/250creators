@@ -120,21 +120,9 @@ export default function CreatorsRegistration() {
       );
 
       console.log('Email sent successfully:', result);
-      alert('Registration submitted successfully! We will contact you soon.');
       
-      // Reset form
-      setFormData({
-        amazina: "",
-        email: "",
-        telefone: "",
-        ahoMbarizwa: "",
-        ufiteYoutube: [],
-        youtubeHandle: "",
-        tshirtNeeded: [],
-        nicheYanjye: [],
-        customNiche: "",
-      });
-      setStep(1);
+      // Redirect to success page
+      window.location.href = '/success';
       
     } catch (error) {
       console.error('Error sending email:', error);
