@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import emailjs from '@emailjs/browser'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -28,7 +29,7 @@ export default function CreatorsRegistration() {
     amazina: "",
     email: "",
     telefone: "",
-    ahoMbarizwa: "",
+    ahoMbarizwa: "kigali", // Set default value
     ufiteYoutube: [],
     youtubeHandle: "",
     tshirtNeeded: [],
@@ -83,8 +84,62 @@ export default function CreatorsRegistration() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Integrate EmailJS here for frontend email sending
-    alert('Form submission will be handled by EmailJS.');
+    
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init('C4wa8sWckJ6dOAeGt');
+      
+      // Map location values to display names
+      const locationMap: { [key: string]: string } = {
+        'kigali': 'Kigali',
+        'northern': 'Amajyaruguru',
+        'southern': 'Amajyepfo',
+        'eastern': 'Iburasirazuba',
+        'western': 'Iburengerazuba'
+      };
+
+      // Prepare template parameters
+      const templateParams = {
+        amazina: formData.amazina,
+        email: formData.email,
+        telefone: formData.telefone,
+        ahoMbarizwa: locationMap[formData.ahoMbarizwa] || formData.ahoMbarizwa,
+        ufiteYoutube: formData.ufiteYoutube.join(', '),
+        youtubeHandle: formData.youtubeHandle || 'N/A',
+        tshirtNeeded: formData.tshirtNeeded.join(', '),
+        nicheYanjye: formData.nicheYanjye.join(', '),
+        customNiche: formData.customNiche || '',
+        submission_date: new Date().toLocaleString()
+      };
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        'service_2697wie', // Service ID
+        'template_45knqdc', // Template ID
+        templateParams
+      );
+
+      console.log('Email sent successfully:', result);
+      alert('Registration submitted successfully! We will contact you soon.');
+      
+      // Reset form
+      setFormData({
+        amazina: "",
+        email: "",
+        telefone: "",
+        ahoMbarizwa: "",
+        ufiteYoutube: [],
+        youtubeHandle: "",
+        tshirtNeeded: [],
+        nicheYanjye: [],
+        customNiche: "",
+      });
+      setStep(1);
+      
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('There was an error submitting your registration. Please try again.');
+    }
   }
 
   const [step, setStep] = useState(1);
