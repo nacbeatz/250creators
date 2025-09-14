@@ -33,7 +33,7 @@ export default function SuccessPage() {
         </h1>
         
         <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-          Thank you for registering for 250Creators Day! We have received your information and you are now registered for the event.
+          Thank you for registering for 250Creators Day!
         </p>
 
         {/* Event Details */}
@@ -42,10 +42,9 @@ export default function SuccessPage() {
             What's Next?
           </h2>
           <ul className="text-gray-300 space-y-2 text-left">
-            <li>• You are now registered for the event</li>
-            <li>• Follow us on social media for updates</li>
-            <li>• Prepare for an amazing networking experience!</li>
-            <li>• Check back for event details and location information</li>
+            <li>• You'll receive a confirmation email with a code, payment details, and instructions to confirm your reservation.</li>
+            <li>• Follow us on social media for updates.</li>
+            <li>• Get ready for an amazing networking experience!</li>
           </ul>
         </div>
 

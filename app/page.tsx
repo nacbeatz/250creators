@@ -85,6 +85,17 @@ export default function CreatorsRegistration() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate required fields
+    if (!formData.amazina || !formData.email || !formData.telefone || !formData.ahoMbarizwa) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    
+    if (!formData.ufiteYoutube.length || !formData.tshirtNeeded.length || !formData.nicheYanjye.length) {
+      alert('Please complete all form steps.');
+      return;
+    }
+    
     try {
       // Initialize EmailJS with your public key
       emailjs.init('C4wa8sWckJ6dOAeGt');
@@ -126,7 +137,12 @@ export default function CreatorsRegistration() {
       
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('There was an error submitting your registration. Please try again.');
+      console.error('Error details:', {
+        message: error.message,
+        status: error.status,
+        text: error.text
+      });
+      alert(`There was an error submitting your registration. Please try again.\n\nError: ${error.message || 'Unknown error'}`);
     }
   }
 
